@@ -21,8 +21,8 @@ public class Main {
 
         //Polynomial
         System.out.println("-- Polynomial --");
-        double[] c = {5,7,3,8,123};
-        double[] c3 = {4,3,7};
+        double[] c = {3,2,0,0,0,0,5};
+        double[] c3 = {5,2};
         //add
         MyPolynomial polynomial = new MyPolynomial(c);
         System.out.println(polynomial.getDegree());
@@ -38,7 +38,7 @@ public class Main {
         System.out.println("-- Polynomial multiply --");
         System.out.println(polynomial);
         System.out.println(polynomial2);
-        polynomial.multiply(polynomial2);
+        System.out.println(polynomial.multiply(polynomial2));
 
     }
 }
