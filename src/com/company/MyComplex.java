@@ -89,7 +89,7 @@ public class MyComplex {
         imag += right.imag;
         return this;
     }
-    
+
     public MyComplex addNew(MyComplex right){
         return new MyComplex(real,imag).add(right);
     }
