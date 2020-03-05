@@ -1,18 +1,21 @@
 package com.company;
 
 import java.util.*;
+import java.util.spi.AbstractResourceBundleProvider;
 
 public class MyPolynomial {
 
     //help class
     class PolyInst implements Comparable<PolyInst>{
+
         //nX^deg <-- part of Polynomial
-        double n;
-        double deg;
+        double n = 1;
+        double deg = 1;
+        boolean free = false;
 
         @Override
         public String toString() {
-            return "polyInst{" +
+            return "PolyInst{" +
                     "n=" + n +
                     ", deg=" + deg +
                     '}';
@@ -108,7 +111,6 @@ public class MyPolynomial {
 
             int startI = degThis - degRight;
             int j = 0;
-            System.out.println("!! "+startI);
             for(int i = 0 ; i < newCoeffs.length; i++){
                 newCoeffs[i] = coeffs[i];
 
@@ -117,11 +119,6 @@ public class MyPolynomial {
                     j++;
                 }
             }
-
-
-
-
-
             return new MyPolynomial(newCoeffs);
         }else {
             return right.add(this);
@@ -130,49 +127,48 @@ public class MyPolynomial {
 
     public MyPolynomial multiply(MyPolynomial right){
 
-        int degThis = getDegree() + 1;
-        int degRight = right.getDegree() + 1;
-
-        if(degThis >= degRight){
+        //if(degThis >= degRight){
             List listParts = new ArrayList();
 
 
-            for(int i = 0; i < degThis; i++){
+            int tDeg = getDegree();
+
+            for(double o : coeffs){
                 List mElements = new ArrayList();
 
-                for(int j = 0; j < degRight; j++){
+                int rightDeg = right.getDegree();
+
+                for(double x : right.coeffs){
+                    if(o == 0) {
+                        continue;
+                    }
+
                     PolyInst t = new PolyInst();
-                    t.n = coeffs[i] * right.coeffs[j];
-                    t.deg = (degThis - i - 1) + (degRight - j - 1);
+
+                    t.n = o * x;
+                    t.deg = tDeg + rightDeg;
+                    if(t.deg == 0)
+                        t.free = true;
                     listParts.add(t);
                     //mElements.add(t);
+                    rightDeg--;
                 }
+                tDeg--;
 
-                //listParts.add(mElements);
+
             }
-            //double[] newCoeffs = addEquals(listParts);
             return addEquals(listParts);
-        }else {
-            return right.multiply(this);
-        }
-
     }
 
     //help methods
     private MyPolynomial addEquals(List list){
         Collections.sort(list);
-        System.out.println(list);
-        System.out.println("!!!!!!!!!");
         while (!checkEqDeg((ArrayList<PolyInst>) list)){
             list = add(list);
-            System.out.println(" !! ---- > "+list);
         }
-        System.out.println("!!!!!!!!!");
 
 
-
-        double[] nCoeffs = new double[(int) ((PolyInst) list.get(0)).deg + 1];
-        System.out.println("!! "+nCoeffs.length);
+        double[] nCoeffs = new double[(int) ((PolyInst) list.get(0)).deg + 1];;
 
         for(PolyInst x : (ArrayList<PolyInst>) list){
             nCoeffs[(int) (nCoeffs.length - x.deg - 1)] = x.n;
@@ -190,31 +186,31 @@ public class MyPolynomial {
         PolyInst prev = (PolyInst) list.get(0);
         list.remove(prev);
 
-        //System.out.println("! "+prev);
         PolyInst tPart = new PolyInst();
         tPart.n = prev.n;
         tPart.deg = prev.deg;
         for(PolyInst o : (ArrayList<PolyInst>)list){
 
             if(o.deg != prev.deg){
-                //System.out.println("---> "+tPart);
                 newCoeffs.add(tPart);
                 tPart = new PolyInst();
                 tPart.n = o.n;
                 tPart.deg = o.deg;
+                tPart.free = o.free;
 
             }else {
-                tPart.n *= o.n;
-                tPart.deg += o.deg;
+                tPart.n += o.n;
+                tPart.deg = o.deg;
             }
-            //System.out.println(o);
 
             prev = o;
         }
 
+        //last part with null deg
+        if(tPart.free)
+            newCoeffs.add(tPart);
 
         Collections.sort(newCoeffs);
-
         return newCoeffs;
     }
 
@@ -228,6 +224,4 @@ public class MyPolynomial {
 
         return true;
     }
-
-
 }
