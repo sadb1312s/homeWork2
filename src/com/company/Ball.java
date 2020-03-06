@@ -6,10 +6,6 @@ public class Ball {
     private int radius;
     private float xDelta;
     private float yDelta;
-    //speed and direction(degree)? can i do so?
-    private int speed;
-    private int direction;
-
 
     public Ball(float x, float y, int radius, int speed, int direction) {
         if(direction < -180 || direction > 180)
@@ -19,19 +15,11 @@ public class Ball {
                 e.printStackTrace();
             }
 
-
         this.x = x;
         this.y = y;
         this.radius = radius;
-        this.speed = speed;
-        this.direction = direction;
         xDelta = (float) (speed * Math.cos(Math.toRadians(direction)));
         yDelta = (float) (- speed * Math.sin(Math.toRadians(direction)));
-
-
-        //formula to calculate degree from xDelta
-        /*float dir = (float) (Math.acos(xDelta/speed));
-        System.out.println((int)Math.toDegrees(dir));*/
     }
 
     public float getX() {
@@ -89,6 +77,6 @@ public class Ball {
 
     @Override
     public String toString() {
-        return "Ball[("+x+","+y+"),"+speed+"=("+xDelta+","+yDelta+")";
+        return "Ball[("+x+","+y+"),speed=("+xDelta+","+yDelta+")";
     }
 }
