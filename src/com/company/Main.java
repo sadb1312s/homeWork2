@@ -45,5 +45,21 @@ public class Main {
         System.out.println(polynomial2);
         System.out.println(" answer "+polynomial.multiply(polynomial2));
 
+        //Ball
+        System.out.println("-- Ball --");
+        Ball ball = new Ball(50,50,10,100,45);
+        System.out.println(ball);
+
+        Container container = new Container(0,100,100,100);
+        System.out.println(container);
+        System.out.println(container.collides(ball));
+        ball.move();
+        System.out.println(ball);
+        System.out.println(container.collides(ball));
+        ball.move();
+        System.out.println(ball);
+        System.out.println(container.collides(ball));
+
+
     }
 }

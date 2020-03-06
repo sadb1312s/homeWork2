@@ -6,7 +6,7 @@ import java.util.spi.AbstractResourceBundleProvider;
 public class MyPolynomial {
 
     //help class
-    class PolyInst implements Comparable<PolyInst>{
+    private class PolyInst implements Comparable<PolyInst>{
 
         //nX^deg <-- part of Polynomial
         double n = 1;
@@ -53,11 +53,16 @@ public class MyPolynomial {
                 if(tCoef > 1 || i == coeffs.length - 1)
                     s += tCoef;
 
+                if(tCoef < 0)
+                    s += tCoef;
+
                 if( i != coeffs.length - 1)
                     s += "X";
 
                 if(deg > 1)
                     s += "^"+deg;
+
+
 
                 list.add(s);
 
@@ -127,37 +132,35 @@ public class MyPolynomial {
 
     public MyPolynomial multiply(MyPolynomial right){
 
-        //if(degThis >= degRight){
-            List listParts = new ArrayList();
+        List listParts = new ArrayList();
 
 
-            int tDeg = getDegree();
+        int tDeg = getDegree();
 
-            for(double o : coeffs){
-                List mElements = new ArrayList();
+        for(double o : coeffs){
+            List mElements = new ArrayList();
 
-                int rightDeg = right.getDegree();
+            int rightDeg = right.getDegree();
 
-                for(double x : right.coeffs){
-                    if(o == 0) {
-                        continue;
-                    }
-
-                    PolyInst t = new PolyInst();
-
-                    t.n = o * x;
-                    t.deg = tDeg + rightDeg;
-                    if(t.deg == 0)
-                        t.free = true;
-                    listParts.add(t);
-                    //mElements.add(t);
-                    rightDeg--;
+            for(double x : right.coeffs){
+                if(o == 0) {
+                    continue;
                 }
-                tDeg--;
 
+                PolyInst t = new PolyInst();
 
+                t.n = o * x;
+                t.deg = tDeg + rightDeg;
+                if(t.deg == 0) {
+                    t.free = true;
+                }
+                listParts.add(t);
+                //mElements.add(t);
+                rightDeg--;
             }
-            return addEquals(listParts);
+            tDeg--;
+        }
+        return addEquals(listParts);
     }
 
     //help methods
