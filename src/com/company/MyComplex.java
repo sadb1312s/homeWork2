@@ -124,4 +124,25 @@ public class MyComplex {
     public MyComplex conjugate(){
         return new MyComplex(real,imag*-1);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MyComplex myComplex = (MyComplex) o;
+
+        return (Double.compare(real, myComplex.real) != 0)
+                && Double.compare(imag, myComplex.imag) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+
+        result = 31 * result + Double.hashCode(real);
+        result = 31 * result + Double.hashCode(imag);
+
+        return result;
+    }
 }

@@ -3,6 +3,7 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("MyComplex test");
         MyComplex myComplex = new MyComplex(5,-3);
         System.out.println(myComplex);
 
@@ -18,6 +19,14 @@ public class Main {
         System.out.println(myComplex.multiply(c2));
         System.out.println(myComplex.conjugate());
         System.out.println(c2.conjugate());
+
+        System.out.println("equals and hash");
+        MyComplex mc1 = new MyComplex(5,-1);
+        MyComplex mc2 = new MyComplex(5,0);
+        System.out.println(mc1.hashCode());
+        System.out.println(mc2.hashCode());
+        System.out.println(mc1.equals(mc2));
+        System.out.println();
 
         //Polynomial
         System.out.println("-- Polynomial --");
@@ -45,6 +54,12 @@ public class Main {
         System.out.println(polynomial2);
         System.out.println(" answer "+polynomial.multiply(polynomial2));
 
+        System.out.println("equals and hash");
+        System.out.println(polynomial.hashCode());
+        System.out.println(polynomial2.hashCode());
+        System.out.println(polynomial.equals(polynomial2));
+        System.out.println();
+
         //Ball
         System.out.println("-- Ball --");
         Ball ball = new Ball(50,50,10,100,45);
@@ -59,6 +74,14 @@ public class Main {
         ball.move();
         System.out.println(ball);
         System.out.println(container.collides(ball));
+        System.out.println("equals and hash");
+        Ball ball2 = new Ball(50,50,10,100,1);
+        Ball ball3 = new Ball(50,50,10,100,45);
+        System.out.println(ball2);
+        System.out.println(ball3);
+        System.out.println(ball2.hashCode());
+        System.out.println(ball3.hashCode());
+        System.out.println(ball2.equals(ball3));
 
 
     }
