@@ -1,4 +1,4 @@
-package com.company;
+package com.company.maths;
 
 public class MyComplex {
     private double real = 0.0;

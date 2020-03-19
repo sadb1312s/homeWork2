@@ -1,7 +1,6 @@
-package com.company;
+package com.company.maths;
 
 import java.util.*;
-import java.util.spi.AbstractResourceBundleProvider;
 
 public class MyPolynomial {
 
@@ -62,19 +61,13 @@ public class MyPolynomial {
                 if(deg > 1)
                     s += "^"+deg;
 
-
-
                 list.add(s);
 
             }else
             {
                 continue;
             }
-
-
             //System.out.println(s);
-
-
         }
 
         String returnS = "";
@@ -98,7 +91,6 @@ public class MyPolynomial {
 
                 res += tCoef * Math.pow(x, deg);
             }
-
         }
 
         return res;
@@ -133,7 +125,6 @@ public class MyPolynomial {
     public MyPolynomial multiply(MyPolynomial right){
 
         List listParts = new ArrayList();
-
 
         int tDeg = getDegree();
 
@@ -170,7 +161,6 @@ public class MyPolynomial {
             list = add(list);
         }
 
-
         double[] nCoeffs = new double[(int) ((PolyInst) list.get(0)).deg + 1];;
 
         for(PolyInst x : (ArrayList<PolyInst>) list){
@@ -178,7 +168,6 @@ public class MyPolynomial {
         }
 
         return new MyPolynomial(nCoeffs);
-
     }
 
     private List add(List list){

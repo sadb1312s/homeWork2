@@ -1,4 +1,6 @@
-package com.company;
+package com.company.geometry.containers;
+
+import com.company.geometry.figures.Ball;
 
 public class Container {
     private int x1;
@@ -31,8 +33,14 @@ public class Container {
     }
 
     public boolean collides(Ball ball){
-        if(x1 < ball.getX() - ball.getRadius() && ball.getX() <x2  - ball.getRadius()){
+        /*if(x1 < ball.getX() - ball.getRadius() && ball.getX() < x2  - ball.getRadius()){
             if(ball.getY() + ball.getRadius() < y1 && ball.getY() - ball.getRadius() > y2){
+                return true;
+            }
+        }*/
+
+        if(Float.compare(x1,ball.getX() - ball.getRadius()) < 0 && Float.compare(ball.getX(), x2 - ball.getRadius()) < 0){
+            if(Float.compare(ball.getY() + ball.getRadius(), y1) < 0 && Float.compare(ball.getY() - ball.getRadius(),y2) > 0){
                 return true;
             }
         }

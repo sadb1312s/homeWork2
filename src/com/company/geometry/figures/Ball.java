@@ -1,4 +1,4 @@
-package com.company;
+package com.company.geometry.figures;
 
 public class Ball {
     private float x;

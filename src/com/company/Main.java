@@ -1,5 +1,10 @@
 package com.company;
 
+import com.company.geometry.figures.Ball;
+import com.company.geometry.containers.Container;
+import com.company.maths.MyComplex;
+import com.company.maths.MyPolynomial;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -62,11 +67,13 @@ public class Main {
 
         //Ball
         System.out.println("-- Ball --");
-        Ball ball = new Ball(50,50,10,100,45);
+        Ball ball = new Ball(11,50,10,100,45);
         System.out.println(ball);
 
         Container container = new Container(0,100,100,100);
         System.out.println(container);
+        System.out.println(container.getHeight());
+        System.out.println(container.getWidth());
         System.out.println(container.collides(ball));
         ball.move();
         System.out.println(ball);
